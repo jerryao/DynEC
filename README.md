@@ -1,9 +1,32 @@
 # DynEC (Reproducible Package)
 
+This repository accompanies the manuscript:
+
+- **DynEC: Dynamic Evolutionary Clustering for Power Users via Multi-View Graph Neural Networks** (Zhao et al., manuscript under revision)
+
 This folder is prepared for GitHub submission. It contains:
 
 - `Sichuan2024Dataset/`: an anonymized, open-access subset of real smart meter data (City-A/B/C, year 2024).
 - `Sichuan2024_Experiments/`: runnable evaluation script and generated result files.
+
+## Sichuan2024Dataset
+
+`Sichuan2024Dataset/` is an anonymized, open-access subset of real-world smart meter data collected from three representative districts (City-A/B/C) in Sichuan Province, China, covering the full year of 2024.
+
+Key properties:
+
+- **Time span:** 2024-01-01 to 2024-12-31 (366 days)
+- **Resolution:** daily profiles with 24 hourly readings (`h0`..`h23`)
+- **Scale:** City-A (800 users), City-B (500 users), City-C (650 users)
+- **Ground truth:** includes `true_cluster` labels for ARI evaluation (see `Sichuan2024Dataset/README.md` for label provenance)
+- **Privacy:** user identifiers are anonymized; load values are normalized to preserve shape patterns while masking absolute consumption
+- **Policy context:** influenced by Sichuan Time-of-Use (TOU) pricing policy (official reference is recorded in `Sichuan2024Dataset/meta.json`)
+
+## Citation
+
+If you use this repository (code or dataset), please cite the paper above and/or cite this repository URL:
+
+- https://github.com/jerryao/DynEC
 
 ## Quick Start
 
