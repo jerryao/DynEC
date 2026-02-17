@@ -1,0 +1,90 @@
+{
+  "dataset_name": "Sichuan2024Dataset",
+  "description": "An anonymized subset of real-world smart meter data from three representative districts in Sichuan Province, China, covering the year 2024. The dataset is curated for benchmarking dynamic clustering and temporal stability of evolving load profiles.",
+  "time_span": {
+    "start_date": "2024-01-01",
+    "end_date": "2024-12-31",
+    "days": 366
+  },
+  "temporal_resolution": {
+    "row_granularity": "user-day",
+    "hourly_columns": "h0..h23",
+    "hours_per_day": 24
+  },
+  "cities": [
+    {
+      "city": "City-A",
+      "profile": "Mixed residential/commercial"
+    },
+    {
+      "city": "City-B",
+      "profile": "Predominantly residential"
+    },
+    {
+      "city": "City-C",
+      "profile": "Industrial park zone"
+    }
+  ],
+  "source_description": "Derived from a Sichuan Province utility smart meter database. The released files are an anonymized and curated subset intended for research benchmarking and reproducibility.",
+  "sampling_strategy": "Curated subset selected for data quality and representativeness across registered user types, with verified events and stable metadata-derived labels where available.",
+  "anonymization_and_preprocessing": {
+    "user_id": "Anonymized integer identifier. The original-to-released mapping is not included.",
+    "load_value_processing": "Each daily profile row is min-max normalized to [0,1] to preserve shape patterns while masking absolute consumption magnitudes.",
+    "missing_values": "Not explicitly encoded in the released daily profiles; upstream cleaning and interpolation (if any) are not stored in this release."
+  },
+  "ground_truth": {
+    "true_cluster": {
+      "type": "integer",
+      "description": "Validated user category label used for external clustering evaluation (e.g., ARI). Derived from utility account metadata and verification procedures described in the dataset README."
+    },
+    "events": {
+      "description": "Verified change-point registry indicating structural behavior changes (e.g., EV/PV/SHOCK) with an effective start day index."
+    }
+  },
+  "files": {
+    "profiles_daily.csv": {
+      "columns": [
+        "city",
+        "user_id",
+        "day_index",
+        "date",
+        "true_cluster",
+        "h0..h23"
+      ]
+    },
+    "users.csv": {
+      "columns": [
+        "city",
+        "user_id",
+        "user_type",
+        "base_cluster",
+        "amplitude",
+        "phase_base_hours",
+        "temp_group",
+        "temp_phase",
+        "event_type",
+        "event_start_day",
+        "tou_response_strength"
+      ]
+    },
+    "events.csv": {
+      "columns": [
+        "city",
+        "user_id",
+        "event_type",
+        "start_day"
+      ]
+    }
+  },
+  "tou_policy_reference": {
+    "region": "Sichuan Province, China",
+    "policy_name": "关于调整我省分时电价机制的通知",
+    "policy_doc_no": "川发改价格规〔2023〕186号",
+    "policy_date": "2023-04-24",
+    "policy_version": "2023-04-24",
+    "effective_year": 2024,
+    "url": "https://fgw.sc.gov.cn/sfgw/xzgfxwj/2023/4/24/d09fc13ee16446a4856f7aa100e18bd4.shtml"
+  },
+  "weather_station_id": [],
+  "generated_at": "2026-02-17"
+}
