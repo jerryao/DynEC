@@ -772,6 +772,7 @@ def main() -> int:
     p.add_argument("--shift-band", type=int, default=2)
     p.add_argument("--smooth-steps", type=int, default=2)
     p.add_argument("--lambda-temp", type=float, default=0.1)
+    p.add_argument("--city", default=None, help="Specific city to process (e.g., City-A)")
     p.add_argument("--skip-internal-metrics", action="store_true")
     p.add_argument("--internal-metrics-sample", type=int, default=0)
     args = p.parse_args()
@@ -787,6 +788,9 @@ def main() -> int:
     for seed in seeds:
         for method in methods:
             for city_name, city_dir in list_city_dirs(data_root):
+                if args.city and city_name != args.city:
+                    continue
+                print(f"Processing {city_name} with method {method} (seed={seed})")
                 rows.extend(
                     evaluate_city_with_method(
                         method=method,
